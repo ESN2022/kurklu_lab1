@@ -106,3 +106,6 @@
 
 # Signal taps
 *.stp
+
+# Fichier sys
+**/kurklu_lab1_sys/*
