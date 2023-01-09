@@ -8,37 +8,52 @@
 
 //Signatures fonctions
 static void key_interrupt(void *Context);
+static void sw_interrupt(void *Context);
+int nombre_bits_a_1(int x);
 void led_chaser();
 
 
 //Variables globaux
 int choice = 0;
 int key;
-int time = 500000;
+int sw;
+int time = 20000;
 int addr1;
 int addr2;
 
 int main(){
 	// Variable pour debug
-	int mask;
+	//int mask;
 	
 	alt_printf("In main start\n");
 	
 	//Lit le mask des boutons
-	mask = IORD_ALTERA_AVALON_PIO_IRQ_MASK(BUTTONS_BASE);
-	alt_printf("MASK = %x\n",mask);
+	//mask = IORD_ALTERA_AVALON_PIO_IRQ_MASK(BUTTONS_BASE);
+	//alt_printf("MASK = %x\n",mask);
 	
 	// applique un mask 0b11 afin d'activer les boutons
 	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(BUTTONS_BASE,0b11);
-	mask = IORD_ALTERA_AVALON_PIO_IRQ_MASK(BUTTONS_BASE);
-	alt_printf("MASK = %x\n",mask);
+	//mask = IORD_ALTERA_AVALON_PIO_IRQ_MASK(BUTTONS_BASE);
+	//alt_printf("MASK = %x\n",mask);
+	
+	// applique un mask 0b1111111111 afin d'activer les switches
+	IOWR_ALTERA_AVALON_PIO_IRQ_MASK(SW_BASE,0b1111111111);
 	
 	// active la detection des boutons
 	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(BUTTONS_BASE,0b11);
 	
-	//Création de l'interruption
+	// active la detection des switches
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(SW_BASE,0b1111111111);
+	
+	//Création de l'interruption pour les boutons
 	if(alt_ic_isr_register(BUTTONS_IRQ_INTERRUPT_CONTROLLER_ID,BUTTONS_IRQ,key_interrupt,NULL,NULL) != 0){
-		alt_printf("Erreur creation interruption\n");
+		alt_printf("Erreur creation interruption pour les boutons\n");
+	}
+	
+
+	//Création de l'interruption pour les switches
+	if(alt_ic_isr_register(SW_IRQ_INTERRUPT_CONTROLLER_ID,SW_IRQ,sw_interrupt,NULL,NULL) != 0){
+		alt_printf("Erreur creation interruption pour les switches\n");
 	}
 	
 	//Led chaser
@@ -58,7 +73,7 @@ int main(){
 //Fonction pour gere l'interruption
 static void key_interrupt(void *Context){
 	
-	alt_printf("INTERRUPT\n");
+	alt_printf("INTERRUPT Boutons\n");
 	// On vérifier le bouton 
 	key = IORD_ALTERA_AVALON_PIO_DATA(BUTTONS_BASE);
 	switch(key){
@@ -81,6 +96,32 @@ static void key_interrupt(void *Context){
 	//Reset la detection des boutons
 	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(BUTTONS_BASE,0b11);
 }
+
+
+static void sw_interrupt(void *Context){
+	
+	alt_printf("INTERRUPT switch\n");
+	// On vérifier le switch 
+	sw = IORD_ALTERA_AVALON_PIO_DATA(SW_BASE);
+	//calcule le nombre de bit a 1
+	int a = nombre_bits_a_1(sw);
+	//modifie le temps
+	time = a * 20000 + 20000;
+
+	//Reset la detection des boutons
+	IOWR_ALTERA_AVALON_PIO_EDGE_CAP(SW_BASE,0b1111111111);
+}
+
+// Fonction qui renvoi le nombre de bit a 1 dans un int
+int nombre_bits_a_1(int x) {
+	int compteur = 0;
+	while (x) {
+		compteur += x & 1;
+		x >>= 1;
+	}
+	return compteur;
+}
+
 
 
 //fonction pour gere le led_chaser
