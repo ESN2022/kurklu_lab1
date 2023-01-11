@@ -20,8 +20,10 @@ Voici le systme initialiser sur qsys :
 
 [![Lab1-qsys.jpg](https://i.postimg.cc/y6LC91zT/Lab1-qsys.jpg)](https://postimg.cc/yW3GCzxJ)
 
+J'ai ensuite crée mon fichier kurklu_lab1.vdh, compiler mon code, generere mon BSP et makefile afin de passer a la partie software
+
 Mon objectif est de pouvoir réaliser le led chaser sur les leds. Activer et desactiver le led chaser a l'aide des interruption sur les boutons et enfin gere la vitesse avec des interruption sur les switches. 
 
 # Avancement
 
-
+J'ai crée 3 fichier C led_chaser.c, led_chaser_interrupt, led_chaser_polling
