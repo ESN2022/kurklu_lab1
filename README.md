@@ -50,7 +50,7 @@ Dans la fonction sw_interrupt() on vien d'abord lire le registe sur lequel est e
 https://user-images.githubusercontent.com/24780090/211770309-9cf0fed9-7302-426b-9a08-b7b0f3c441d1.mov
 
 
-Le lab1 est alors terminée.
 
 # Conclusion
 
+J'ai réussi a términer le lab1 sans grande difictulté. C'est la premiere fois que je travail sur une vrai cible a l'aide de quartus. Ce premier tp ma permit de reprendre en main les different outil afin de travailler sur la partie hardware et la partie software. Le seul point ou j'ai perdu du tamps lors de ce tp a était les interruption. La syntaxe des fonction utiliser dans le cours me donner des warnings et ne fonctionner pas. En lisant la documentation fournit sur moddle je me suis rendu compte que ALT_ENHANCED_INTERRUPT_API_PRESENT etait défini dans mon fichier system.h. J'ai donc utiliser l'autre syntaxe pour definir les intrruption ce qui a fonctionner. 
