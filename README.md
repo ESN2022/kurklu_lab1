@@ -7,3 +7,5 @@ Dans le cadre de notre cours de conception conjointe en GE5A a Polyteh Clermont,
 
 # Architecture
 
+[![Lab1-KURKLU.jpg](https://i.postimg.cc/8PJcfSGY/Lab1-KURKLU.jpg)](https://postimg.cc/3dhYzzdj)
+
