@@ -37,7 +37,7 @@ Pour la version avec polling j'ai rajouter un switch case au debut de ma boucle.
 ## led chaser interruption
 Pour la version avec interruption j'ai mit en place mes differente fonctions pour gere les interuptions. key_interrupt() pour les keys et sw_interrupt() pour les switches. J'ai ensuite dans mon main, intialiser mes interruption en indiquant les mask, les edge capture et l'enregistrement des interruptions. Dans la fonction key_interrupt() on vien regarder le bouton appuyer en fonction de ce bouton on lance le led_chaser ou on le renitialise en renitialisant aussi les varible qui permet de le gerer. 
 
-VIDO
+[![7120.gif](https://i.postimg.cc/NfsYzQTK/7120.gif)](https://postimg.cc/kDpkV3TC)
 
 Dans la fonction sw_interrupt() on vien d'abord lire le registe sur lequel est ecrit les switches. Ensuite je fait appel a ma fonction nombre_bits_a_1() qui va me retourne le nombre de bit a 1 dans le registe. En fonction de ce nombre je vais venir modifier ma variable time afin de modifier la vitesse de mon led chaser.
 
