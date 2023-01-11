@@ -15,3 +15,7 @@ Par la suite j'ai ajouté les PIO afin de pouvoir gere mes I/O.
 * PIO sur 8 bits pour mes led
 * PIO sur 2 bits pour mes keys
 * PIO sur 9 bits pour mes switches
+
+Voici le systme initialiser sur qsys :
+
+[![Lab1-qsys.jpg](https://i.postimg.cc/y6LC91zT/Lab1-qsys.jpg)](https://postimg.cc/yW3GCzxJ)
