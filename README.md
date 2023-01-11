@@ -26,4 +26,19 @@ Mon objectif est de pouvoir réaliser le led chaser sur les leds. Activer et des
 
 # Avancement
 
-J'ai crée 3 fichier C led_chaser.c, led_chaser_interrupt, led_chaser_polling
+J'ai crée 3 fichier C led_chaser.c, led_chaser_polling.c et led_chaser_interrupt.c  pour les differente version.
+
+## led chaser simple
+Afin d'implementer le led chaser j'ai tout simplement réaliser dans une boucle, des shift de bit a gauche en partant de la led0 at la led7 puis des shift a droite de led7 a led0. A chaque ecriture j'ai realiser un temps d'arret a l'aide de la fonction usleep() qui va aussi me permetre de gere la vitesse de mon led cahser dans l'etape de polling.
+
+## led chaser polling
+Pour la version avec polling j'ai rajouter un switch case au debut de ma boucle. Se switch case permet de regarder les switch activé et modifier ensuite la variable time utiliser par la fonction usleep(). Cela permet d'augmenter ou diminuer le temps d'attente entre chaque ecriture donc modifier la vitesse.
+
+## led chaser interruption
+Pour la version avec interruption j'ai mit en place mes differente fonctions pour gere les interuptions. key_interrupt() pour les keys et sw_interrupt() pour les switches. J'ai ensuite dans mon main, intialiser mes interruption en indiquant les mask, les edge capture et l'enregistrement des interruptions. Dans la fonction key_interrupt() on vien regarder le bouton appuyer en fonction de ce bouton on lance le led_chaser ou on le renitialise en renitialisant aussi les varible qui permet de le gerer. 
+
+VIDO
+
+Dans la fonction sw_interrupt() on vien d'abord lire le registe sur lequel est ecrit les switches. Ensuite je fait appel a ma fonction nombre_bits_a_1() qui va me retourne le nombre de bit a 1 dans le registe. En fonction de ce nombre je vais venir modifier ma variable time afin de modifier la vitesse de mon led chaser
+
+
