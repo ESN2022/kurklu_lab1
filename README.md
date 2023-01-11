@@ -19,3 +19,5 @@ Par la suite j'ai ajouté les PIO afin de pouvoir gere mes I/O.
 Voici le systme initialiser sur qsys :
 
 [![Lab1-qsys.jpg](https://i.postimg.cc/y6LC91zT/Lab1-qsys.jpg)](https://postimg.cc/yW3GCzxJ)
+
+Mon objectif est de pouvoir réaliser le led chaser sur les leds. Activer et desactiver le led chaser a l'aide des interruption sur les boutons et enfin gere la vitesse avec de interruption sur les switches. 
